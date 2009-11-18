@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Settings>
+	<Rowe Tooltip="mit Heftrand plotten" AllColorsAsBlack="true" PrintScaleMode="kPrintBestFitScale" UpdatePlotstyles="true" UpdateIProperties="false" Rotate="A0A1" WindowsPrinterName="\\sgho005\Plotter_Rowe"></Rowe>
+	<RoweHeft Tooltip="mit Heftstreifen plotten" AllColorsAsBlack="true" PrintScaleMode="kPrintBestFitScale" UpdatePlotstyles="true" UpdateIProperties="false" WindowsPrinterName="\\sgho005\Plotter_Rowe_Heft" Rotate="A0A1"></RoweHeft>
+	<PDF Tooltip="PDF in schwarz" AllColorsAsBlack="true" PrintScaleMode="kPrintBestFitScale" UpdatePlotstyles="true" UpdateIProperties="false" WindowsPrinterName="PDFCreator" Rotate="A0A1"></PDF>
+	<PDFFarbe Tooltip="PDF in Farbe" AllColorsAsBlack="false" PrintScaleMode="kPrintBestFitScale" UpdatePlotstyles="true" UpdateIProperties="false" WindowsPrinterName="PDFCreator" Rotate="A0A1"></PDFFarbe>
+	<Defaultprinter Tooltip="Standarddrucker" AllColorsAsBlack="true" PrintScaleMode="kPrintBestFitScale" UpdatePlotstyles="true" UpdateIProperties="false" FixedPaperSize="kPaperSizeA3" WindowsPrinterName="defaultprinter"></Defaultprinter>
+</Settings>

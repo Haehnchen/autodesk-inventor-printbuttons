@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<languages>
+	<ErrorText>Fehler in {AddinName}:\r\n</ErrorText>
+	<ErrorWriteFile>Kann in folgende Datei nicht schreiben: to\r\n</ErrorWriteFile>
+	<ErrorNoIDW>Fehler: Keine IDW Zeichnungs geoeffnet</ErrorNoIDW>
+	<ErrorNoFileName>Kein Dateiname zum Speichern gefunden\r\nWurde die Datei noch nicht gespeichert?</ErrorNoFileName>
+	<ErrorFileExistsDelete>Datei {filename} ist bereits vorhanden\r\nSoll sie überschrieben werden?</ErrorFileExistsDelete>
+	<FileSaved>{filename} gespeichert.\r\nSoll sie jetzt geöffnet werden?</FileSaved>
+	<NoPrinterConfig>Keine Druckerkonfiguration gefunden. An diesen Positionen wurde gesucht:\r\n</NoPrinterConfig>
+	<TabName>Druckbuttons</TabName>
+	<PanelNamePrinter>Drucker</PanelNamePrinter>
+	<PanelNameTranslator>Translator</PanelNameTranslator>
+</languages>
