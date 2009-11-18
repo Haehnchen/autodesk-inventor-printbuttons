@@ -1,0 +1,12 @@
+<languages>
+	<ErrorText>Error in Addin-In {AddinName}:\r\n</ErrorText>
+	<ErrorWriteFile>Error writing to\r\n</ErrorWriteFile>
+	<ErrorNoIDW>no IDW-File</ErrorNoIDW>
+	<ErrorNoFileName>no filename found; save it first?</ErrorNoFileName>
+	<ErrorFileExistsDelete>file {filename} already exists. overwrite it?</ErrorFileExistsDelete>
+	<FileSaved>{filename} saved.\r\nopen it?</FileSaved>
+	<NoPrinterConfig>No printer config found. need own here:\r\n</NoPrinterConfig>
+	<TabName>Printbuttons</TabName>
+	<PanelNamePrinter>Printer</PanelNamePrinter>
+	<PanelNameTranslator>Translator</PanelNameTranslator>
+</languages>
