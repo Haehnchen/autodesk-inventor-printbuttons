@@ -189,6 +189,14 @@ Namespace PrintButtons
             'check if we want to overwrite the file if it exists
             If HelperFileExistsOverwrite(OutPutFile) = False Then Exit Sub
 
+            'perform printevents similar to m_InputEvents_OnActivateCommand
+            If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Or AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then
+                Dim plotCfg As New InventorPlotClass(m_inventorApplication.ActiveDocument)
+                If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Then plotCfg.GenerateIProperties()
+                If AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then plotCfg.UpdateStyles()
+                plotCfg.UpdateDocument()
+            End If
+
             'use translator function depend TranslatorAddinEnum
             Select Case type
                 Case TranslatorAddinEnum.dwg
@@ -213,13 +221,8 @@ Namespace PrintButtons
                 If CommandName = "AppFilePrintCmd" Then
                     Try
                         Dim plotCfg As New InventorPlotClass(m_inventorApplication.ActiveDocument)
-                        If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Then
-                            plotCfg.GenerateIProperties()
-                        End If
-
-                        If AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then
-                            plotCfg.UpdateStyles()
-                        End If
+                        If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Then plotCfg.GenerateIProperties()
+                        If AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then plotCfg.UpdateStyles()
 
                         If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Or _
                            AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then
