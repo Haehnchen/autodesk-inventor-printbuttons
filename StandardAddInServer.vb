@@ -91,12 +91,18 @@ Namespace PrintButtons
                         AddHandler k.pressed, AddressOf Me.ButtonEvent
                     Next
 
-                    OtherPanel.CommandControls.AddButton(m_buttonPDFColor, True)
-                    OtherPanel.CommandControls.AddButton(m_buttonPDFBlack, True)
-                    OtherPanel.CommandControls.AddSeparator()
-                    OtherPanel.CommandControls.AddButton(m_buttonDWF, True)
-                    OtherPanel.CommandControls.AddButton(m_buttonDWG, True)
-                    OtherPanel.CommandControls.AddSeparator()
+                    If AllButtons.b("ShowPDFTranslator", True) = True Then
+                        OtherPanel.CommandControls.AddButton(m_buttonPDFColor, True)
+                        OtherPanel.CommandControls.AddButton(m_buttonPDFBlack, True)
+                        OtherPanel.CommandControls.AddSeparator()
+                    End If
+
+                    If AllButtons.b("ShowDrawingTranslator", True) = True Then
+                        OtherPanel.CommandControls.AddButton(m_buttonDWF, True)
+                        OtherPanel.CommandControls.AddButton(m_buttonDWG, True)
+                        OtherPanel.CommandControls.AddSeparator()
+                    End If
+
                     OtherPanel.CommandControls.AddButton(m_buttonHelp, True)
 
                 Else
@@ -120,13 +126,19 @@ Namespace PrintButtons
                         AddHandler k.pressed, AddressOf Me.ButtonEvent
                     Next
 
-                    SlotCommandBar1.Controls.AddButton(m_buttonPDFColor)
-                    SlotCommandBar1.Controls.AddButton(m_buttonPDFBlack)
-                    SlotCommandBar1.Controls.AddButton(m_buttonDWF)
-                    SlotCommandBar1.Controls.AddButton(m_buttonDWG)
-                    SlotCommandBar1.Controls.AddButton(m_buttonHelp)
+                    If AllButtons.b("ShowPDFTranslator", True) = True Then
+                        SlotCommandBar1.Controls.AddButton(m_buttonPDFColor)
+                        SlotCommandBar1.Controls.AddButton(m_buttonPDFBlack)
+                    End If
 
+                    If AllButtons.b("ShowDrawingTranslator", True) = True Then
+                        SlotCommandBar1.Controls.AddButton(m_buttonDWF)
+                        SlotCommandBar1.Controls.AddButton(m_buttonDWG)
+                    End If
+
+                    SlotCommandBar1.Controls.AddButton(m_buttonHelp)
                     SlotCommandBar1.Visible = True
+
                 End If
 
             Catch ex As Exception
