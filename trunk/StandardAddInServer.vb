@@ -74,7 +74,7 @@ Namespace PrintButtons
                 m_buttonPDFBlack = controlDefs.AddButtonDefinition("PDF black", iNames & "intButtonPDFBlack", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.pdf_black), BitmapToIPicture(My.Resources.pdf_black), ButtonDisplayEnum.kNoTextWithIcon)
                 m_buttonDWF = controlDefs.AddButtonDefinition("DWF", iNames & "intButtonDWF", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.dxf), BitmapToIPicture(My.Resources.dxf), ButtonDisplayEnum.kNoTextWithIcon)
                 m_buttonDWG = controlDefs.AddButtonDefinition("DWG", iNames & "intButtonDWG", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.dwg2007), BitmapToIPicture(My.Resources.dwg2007), ButtonDisplayEnum.kNoTextWithIcon)
-                m_buttonHelp = controlDefs.AddButtonDefinition("Info", iNames & "intButtonHelp", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.dwg2007), BitmapToIPicture(My.Resources.ico_large_question), ButtonDisplayEnum.kNoTextWithIcon)
+                m_buttonHelp = controlDefs.AddButtonDefinition("Info", iNames & "intButtonHelp", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.ico_large_question), BitmapToIPicture(My.Resources.ico_large_question), ButtonDisplayEnum.kNoTextWithIcon)
 
                 Dim uiManager As Inventor.UserInterfaceManager = m_inventorApp.UserInterfaceManager
                 If m_inventorApp.UserInterfaceManager.InterfaceStyle = Inventor.InterfaceStyleEnum.kRibbonInterface Then
