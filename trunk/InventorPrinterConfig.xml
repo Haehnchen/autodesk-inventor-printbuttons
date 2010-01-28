@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<Settings>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Settings SetPlotIFeaturesOnGlobalPrintEvent="true" UpdatePlotStylesOnGlobalPrintEvent="true" ShowPDFTranslator="true" ShowDrawingTranslator="true">
 	<Rowe Tooltip="mit Heftrand plotten" AllColorsAsBlack="true" PrintScaleMode="kPrintBestFitScale" UpdatePlotstyles="true" UpdateIProperties="false" Rotate="A0A1" WindowsPrinterName="\\sgho005\Plotter_Rowe"></Rowe>
 	<RoweHeft Tooltip="mit Heftstreifen plotten" AllColorsAsBlack="true" PrintScaleMode="kPrintBestFitScale" UpdatePlotstyles="true" UpdateIProperties="false" WindowsPrinterName="\\sgho005\Plotter_Rowe_Heft" Rotate="A0A1"></RoweHeft>
 	<PDF Tooltip="PDF in schwarz" AllColorsAsBlack="true" PrintScaleMode="kPrintBestFitScale" UpdatePlotstyles="true" UpdateIProperties="false" WindowsPrinterName="PDFCreator" Rotate="A0A1"></PDF>
