@@ -35,6 +35,7 @@ Namespace PrintButtons
                 Dim m_inventorApp As Inventor.Application = m_inventorApplication
                 m_InputEvents = m_inventorApplication.CommandManager.UserInputEvents
 
+
                 SettingsLog.Add("DebugLog: " & DebugLog("", True))
 
                 'Dim m_userInterfaceManager As Inventor.UserInterfaceManager = m_inventorApplication.UserInterfaceManager
@@ -48,6 +49,7 @@ Namespace PrintButtons
                 Dim AddInCLSIDString As String = "{" & AddInCLSID.Value & "}"
 
                 Dim iNames As String = My.Application.Info.AssemblyName
+                SettingsLog.Add("Version: " & My.Application.Info.Version.ToString)
 
                 ' TODO:  Add ApplicationAddInServer.Activate implementation.
                 ' e.g. event initialization, command creation etc.
@@ -253,7 +255,7 @@ Namespace PrintButtons
             For Each strline As String In SettingsLog
                 b &= strline & vbCrLf
             Next
-            MsgBox(b, MsgBoxStyle.Information)
+            MsgBox(b, MsgBoxStyle.Information, My.Application.Info.AssemblyName & " - " & My.Application.Info.Version.ToString)
         End Sub
 #End Region
 
