@@ -1,7 +1,9 @@
 '$Id$
 Imports Inventor
 Imports System.Collections.Generic
+
 Public Class XMLButtonDef
+    Private GlobalSettings As New System.Collections.Generic.Dictionary(Of String, Boolean)
     Dim _Buttons As New List(Of SingleButtonDefintion)
     ''' <summary>
     ''' Need a XML Config File
@@ -12,6 +14,12 @@ Public Class XMLButtonDef
         Dim xml As Xml.XmlDocument = New Xml.XmlDocument
         xml.Load(ConfFile)
 
+        'read attributes of settings node for global use
+        For Each a As System.Xml.XmlAttribute In xml.DocumentElement.Attributes
+            GlobalSettings.Add(a.Name, Convert.ToBoolean(a.InnerText))
+        Next
+
+        'read printer infos
         For Each s As System.Xml.XmlNode In xml.DocumentElement.ChildNodes
             Dim sButton As New SingleButtonDefintion
 
@@ -33,6 +41,19 @@ Public Class XMLButtonDef
 
         Next
     End Sub
+    ''' <summary>
+    ''' get a attribute out of settings node
+    ''' </summary>
+    ''' <param name="StringName">name of attribute</param>
+    ''' <param name="DefaultValue">default value if StringName in unknown</param>
+    ''' <returns>boolean</returns>
+    Function b(ByVal StringName As String, Optional ByVal DefaultValue As Boolean = False) As Boolean
+        If GlobalSettings.ContainsKey(StringName) Then
+            Return GlobalSettings.Item(StringName)
+        Else
+            Return DefaultValue
+        End If
+    End Function
     ''' <summary>
     ''' this should be used to check if the button config was changed or reordered
     ''' it compares the internalnames
