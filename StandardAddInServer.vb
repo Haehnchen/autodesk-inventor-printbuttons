@@ -11,6 +11,7 @@ Namespace PrintButtons
 
         ' Inventor application object.
         Private m_inventorApplication As Inventor.Application
+        Private WithEvents m_InputEvents As UserInputEvents
 
         'use custom buttons
         Dim WithEvents m_buttonPDFColor As ButtonDefinition
@@ -22,7 +23,6 @@ Namespace PrintButtons
         Dim AllButtons As XMLButtonDef
 
 #Region "ApplicationAddInServer Members"
-
         Public Sub Activate(ByVal addInSiteObject As Inventor.ApplicationAddInSite, ByVal firstTime As Boolean) Implements Inventor.ApplicationAddInServer.Activate
 
             ' This method is called by Inventor when it loads the AddIn.
@@ -205,6 +205,31 @@ Namespace PrintButtons
             End If
 
         End Sub
+
+        Private Sub m_InputEvents_OnActivateCommand(ByVal CommandName As String, ByVal Context As Inventor.NameValueMap) Handles m_InputEvents.OnActivateCommand
+            If m_inventorApplication.ActiveDocumentType = DocumentTypeEnum.kDrawingDocumentObject Then
+                If CommandName = "AppFilePrintCmd" Then
+                    Try
+                        Dim plotCfg As New InventorPlotClass(m_inventorApplication.ActiveDocument)
+                        If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Then
+                            plotCfg.GenerateIProperties()
+                        End If
+
+                        If AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then
+                            plotCfg.UpdateStyles()
+                        End If
+
+                        If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Or _
+                           AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then
+                            plotCfg.UpdateDocument()
+                        End If
+
+                    Catch ex As Exception
+                        MsgBox(ex.Message)
+                    End Try
+                End If
+            End If
+        End Sub
 #Region "InternalButtons"
         Private Sub m_buttonDWG_OnExecute(ByVal Context As Inventor.NameValueMap) Handles m_buttonDWG.OnExecute
             TranslatorAddinHelper(TranslatorAddinEnum.dwg)
@@ -348,6 +373,11 @@ Namespace PrintButtons
 
 #End Region
 
+
+
+        Private Sub m_InputEvents1_OnStartCommand(ByVal CommandID As Inventor.CommandIDEnum) Handles m_InputEvents1.OnStartCommand
+            MsgBox("commandid")
+        End Sub
     End Class
 
 End Namespace
