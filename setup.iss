@@ -9,13 +9,13 @@
 AppId={{E5559863-13D4-46AE-9B1A-948609254CA7}
 AppName=Inventor-PrintButtons
 AppVerName=Inventor-PrintButtons
-AppVersion=1.0
+AppVersion=1.0.0.1
 DefaultDirName={pf}\Inventor-Addins\PrintButtons
 DisableProgramGroupPage=yes
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
-VersionInfoVersion=1.0
+VersionInfoVersion=1.0.0.1
 VersionInfoProductName=Inventor-PrintButtons
 ArchitecturesInstallIn64BitMode=x64 ia64
 
