@@ -33,6 +33,8 @@ Namespace PrintButtons
             m_inventorApplication = addInSiteObject.Application
             Try
                 Dim m_inventorApp As Inventor.Application = m_inventorApplication
+                m_InputEvents = m_inventorApplication.CommandManager.UserInputEvents
+
                 SettingsLog.Add("DebugLog: " & DebugLog("", True))
 
                 'Dim m_userInterfaceManager As Inventor.UserInterfaceManager = m_inventorApplication.UserInterfaceManager
@@ -373,11 +375,6 @@ Namespace PrintButtons
 
 #End Region
 
-
-
-        Private Sub m_InputEvents1_OnStartCommand(ByVal CommandID As Inventor.CommandIDEnum) Handles m_InputEvents1.OnStartCommand
-            MsgBox("commandid")
-        End Sub
     End Class
 
 End Namespace
