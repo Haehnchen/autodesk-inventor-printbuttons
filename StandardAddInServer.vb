@@ -68,11 +68,11 @@ Namespace PrintButtons
                 'we dont need crazy firstTime workarounds
 
                 Dim controlDefs As ControlDefinitions = m_inventorApp.CommandManager.ControlDefinitions
-                m_buttonPDFColor = controlDefs.AddButtonDefinition("PDF", iNames & "intButtonPDF", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.pdf), BitmapToIPicture(My.Resources.pdf))
-                m_buttonPDFBlack = controlDefs.AddButtonDefinition("PDF black", iNames & "intButtonPDFBlack", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.pdf_black), BitmapToIPicture(My.Resources.pdf_black))
-                m_buttonDWF = controlDefs.AddButtonDefinition("DWF", iNames & "intButtonDWF", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.dxf), BitmapToIPicture(My.Resources.dxf))
-                m_buttonDWG = controlDefs.AddButtonDefinition("DWG", iNames & "intButtonDWG", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.dwg2007), BitmapToIPicture(My.Resources.dwg2007))
-                m_buttonHelp = controlDefs.AddButtonDefinition("Info", iNames & "intButtonHelp", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.dwg2007), BitmapToIPicture(My.Resources.ico_large_question))
+                m_buttonPDFColor = controlDefs.AddButtonDefinition("PDF", iNames & "intButtonPDF", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.pdf), BitmapToIPicture(My.Resources.pdf), ButtonDisplayEnum.kNoTextWithIcon)
+                m_buttonPDFBlack = controlDefs.AddButtonDefinition("PDF black", iNames & "intButtonPDFBlack", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.pdf_black), BitmapToIPicture(My.Resources.pdf_black), ButtonDisplayEnum.kNoTextWithIcon)
+                m_buttonDWF = controlDefs.AddButtonDefinition("DWF", iNames & "intButtonDWF", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.dxf), BitmapToIPicture(My.Resources.dxf), ButtonDisplayEnum.kNoTextWithIcon)
+                m_buttonDWG = controlDefs.AddButtonDefinition("DWG", iNames & "intButtonDWG", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.dwg2007), BitmapToIPicture(My.Resources.dwg2007), ButtonDisplayEnum.kNoTextWithIcon)
+                m_buttonHelp = controlDefs.AddButtonDefinition("Info", iNames & "intButtonHelp", CommandTypesEnum.kFilePropertyEditCmdType, Nothing, Nothing, Nothing, BitmapToIPicture(My.Resources.dwg2007), BitmapToIPicture(My.Resources.ico_large_question), ButtonDisplayEnum.kNoTextWithIcon)
 
                 Dim uiManager As Inventor.UserInterfaceManager = m_inventorApp.UserInterfaceManager
                 If m_inventorApp.UserInterfaceManager.InterfaceStyle = Inventor.InterfaceStyleEnum.kRibbonInterface Then
@@ -98,9 +98,35 @@ Namespace PrintButtons
                     OtherPanel.CommandControls.AddButton(m_buttonDWG, True)
                     OtherPanel.CommandControls.AddSeparator()
                     OtherPanel.CommandControls.AddButton(m_buttonHelp, True)
+
                 Else
                     'do we need classic ui interface support?
+                    Dim SlotCommandBar1 As CommandBar
+                    Dim UserInterfaceManager1 As UserInterfaceManager = m_inventorApplication.UserInterfaceManager
 
+                    If firstTime = True Then
+                        DebugLog("firstrun")
+                        SlotCommandBar1 = UserInterfaceManager1.CommandBars.Add(LanguageStr.s("PanelNamePrinter"), LanguageStr.s("PanelNamePrinter") & "ToolbarIntName", , AddInCLSIDString)
+                    Else
+                        SlotCommandBar1 = UserInterfaceManager1.CommandBars.Item(LanguageStr.s("PanelNamePrinter") & "ToolbarIntName")
+                        For Each CurrentInventorButton As CommandBarControl In SlotCommandBar1.Controls
+                            CurrentInventorButton.Delete()
+                        Next
+                    End If
+
+                    For Each ButtonItem As XMLButtonDef.SingleButtonDefintion In AllButtons.Buttons
+                        Dim k As New RibbonButton(controlDefs.AddButtonDefinition(ButtonItem.Name, ButtonItem.InternalName, CommandTypesEnum.kFilePropertyEditCmdType, Nothing, ButtonItem.Tooltip, ButtonItem.Tooltip, IPictureDisp(ButtonItem.Name), IPictureDisp(ButtonItem.Name), ButtonDisplayEnum.kNoTextWithIcon))
+                        SlotCommandBar1.Controls.AddButton(k.ButtonDefinition)
+                        AddHandler k.pressed, AddressOf Me.ButtonEvent
+                    Next
+
+                    SlotCommandBar1.Controls.AddButton(m_buttonPDFColor)
+                    SlotCommandBar1.Controls.AddButton(m_buttonPDFBlack)
+                    SlotCommandBar1.Controls.AddButton(m_buttonDWF)
+                    SlotCommandBar1.Controls.AddButton(m_buttonDWG)
+                    SlotCommandBar1.Controls.AddButton(m_buttonHelp)
+
+                    SlotCommandBar1.Visible = True
                 End If
 
             Catch ex As Exception
