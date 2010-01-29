@@ -1,0 +1,1 @@
+%ProgramFiles%\SharpDevelop\3.0\bin\Tools\Wix\heat.exe file bin\PrintButtons.dll -out PrintButtons.wxs
