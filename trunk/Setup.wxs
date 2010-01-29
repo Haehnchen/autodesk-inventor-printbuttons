@@ -1,0 +1,56 @@
+﻿<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*"
+		Name="Autodesk Inventor Addin - PrintButtons"
+		Language="1033"
+		Version="1.0.0.0"
+		UpgradeCode="0DC5E98B-193C-4DF2-A038-740DE32B131F"
+		Manufacturer="Daniel Espendiller">
+		<Package Description="Autodesk Inventor Addin" InstallerVersion="200" Compressed="yes"/>
+
+		<!-- dont install a x86 build on a x64 system -->
+		<?if $(var.Platform) = "x86" ?> 	
+			<Condition Message="This is a x86 package which cannot be installed in 64-bit Windows. Please use the 64-bit package">Not VersionNT64</Condition>
+		<?endif?>			
+		
+		<!--
+			Source media for the installation. 
+ 			Specifies a single cab file to be embedded in the installer's .msi. 
+		-->
+		<Media Id="1" Cabinet="contents.cab" EmbedCab="yes" CompressionLevel="high"/>
+		
+		<!-- Installation directory and files are defined in Files.wxs -->
+		<Directory Id="TARGETDIR" Name="SourceDir"/>
+		
+		<Feature Id="Complete" Level="1">
+		         <ComponentRef Id="InventorPrinterConfigXml"/>
+		         <ComponentRef Id="PrintButtonsDll"/>
+		         <ComponentRef Id="PrintButtonsTlb"/>
+		         <ComponentRef Id="SettingsXml"/>
+		         <ComponentRef Id="A3farbeGif"/>
+		         <ComponentRef Id="DefaultprinterGif"/>
+		         <ComponentRef Id="FarbeGif"/>
+		         <ComponentRef Id="Farbe2Gif"/>
+		         <ComponentRef Id="PdfGif"/>
+		         <ComponentRef Id="PdffarbeGif"/>
+		         <ComponentRef Id="RoweGif"/>
+		         <ComponentRef Id="RoweheftGif"/>
+		         <ComponentRef Id="InstallBat"/>
+		         <ComponentRef Id="UninstallBat"/>
+		         <ComponentRef Id="DeuXml"/>
+		         <ComponentRef Id="cmpFC41C28EC1A5DDF1B38CB48A5F78258C"/>
+		</Feature>
+
+		<!--
+		register dotnet dll with regasm (we use heat.exe to generate registry entries; so this is only a alternative)
+		<InstallExecuteSequence>
+		    <Custom Action='comReg' After='InstallFinalize'>NOT REMOVE</Custom>
+		    <Custom Action='comUnreg' Before='RemoveFiles'>REMOVE</Custom> 
+		  </InstallExecuteSequence>
+		
+		  <CustomAction Id='comReg' Directory='INSTALLDIR' ExeCommand='"[WindowsFolder]Microsoft.NET\Framework\v2.0.50727\regasm.exe" "[INSTALLDIR]InventorTools.dll"' Return='check' />
+		  <CustomAction Id='comUnreg' Directory='INSTALLDIR' ExeCommand='"[WindowsFolder]Microsoft.NET\Framework\v2.0.50727\regasm.exe" /u "[INSTALLDIR]InventorTools.dll"' Return='check' />	
+		--> 		
+	
+	</Product>
+</Wix>
