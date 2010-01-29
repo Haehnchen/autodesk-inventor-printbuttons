@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="TARGETDIR">
+            <Directory Id="dirCFD54C07EFB094CAD317543172D62CC3" Name="bin" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirCFD54C07EFB094CAD317543172D62CC3">
+            <Component Id="cmpFC41C28EC1A5DDF1B38CB48A5F78258C" Guid="PUT-GUID-HERE">
+                <Class Id="{74607E91-23C7-3472-814A-0C722CA5EC52}" Context="InprocServer32" Description="PrintButtons.InventorPlotClass+sRotatePlot" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="PrintButtons.InventorPlotClass+sRotatePlot" Description="PrintButtons.InventorPlotClass+sRotatePlot" />
+                </Class>
+                <Class Id="{E81CFA62-537D-3E59-ADDA-F0E007C7F532}" Context="InprocServer32" Description="PrintButtons.XMLButtonDef+SingleButtonDefintion" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="PrintButtons.XMLButtonDef+SingleButtonDefintion" Description="PrintButtons.XMLButtonDef+SingleButtonDefintion" />
+                </Class>
+                <Class Id="{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}" Context="InprocServer32" Description="PrintButtons" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="PrintButtons.StandardAddInServer" Description="PrintButtons.PrintButtons.StandardAddInServer" />
+                </Class>
+                <File Id="fil42B81EB2B860BF0A024B0E2A8AABB37B" KeyPath="yes" Source="SourceDir\bin\PrintButtons.dll" />
+                <ProgId Id="Record" />
+                <RegistryValue Root="HKCR" Key="CLSID\{74607E91-23C7-3472-814A-0C722CA5EC52}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{74607E91-23C7-3472-814A-0C722CA5EC52}\InprocServer32\1.0.0.17" Name="Class" Value="PrintButtons.InventorPlotClass+sRotatePlot" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{74607E91-23C7-3472-814A-0C722CA5EC52}\InprocServer32\1.0.0.17" Name="Assembly" Value="PrintButtons, Version=1.0.0.17, Culture=neutral, PublicKeyToken=565c0741a0ba8e39" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{74607E91-23C7-3472-814A-0C722CA5EC52}\InprocServer32\1.0.0.17" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{74607E91-23C7-3472-814A-0C722CA5EC52}\InprocServer32\1.0.0.17" Name="CodeBase" Value="file:///[#fil42B81EB2B860BF0A024B0E2A8AABB37B]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{74607E91-23C7-3472-814A-0C722CA5EC52}\InprocServer32" Name="Class" Value="PrintButtons.InventorPlotClass+sRotatePlot" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{74607E91-23C7-3472-814A-0C722CA5EC52}\InprocServer32" Name="Assembly" Value="PrintButtons, Version=1.0.0.17, Culture=neutral, PublicKeyToken=565c0741a0ba8e39" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{74607E91-23C7-3472-814A-0C722CA5EC52}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{74607E91-23C7-3472-814A-0C722CA5EC52}\InprocServer32" Name="CodeBase" Value="file:///[#fil42B81EB2B860BF0A024B0E2A8AABB37B]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E81CFA62-537D-3E59-ADDA-F0E007C7F532}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E81CFA62-537D-3E59-ADDA-F0E007C7F532}\InprocServer32\1.0.0.17" Name="Class" Value="PrintButtons.XMLButtonDef+SingleButtonDefintion" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E81CFA62-537D-3E59-ADDA-F0E007C7F532}\InprocServer32\1.0.0.17" Name="Assembly" Value="PrintButtons, Version=1.0.0.17, Culture=neutral, PublicKeyToken=565c0741a0ba8e39" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E81CFA62-537D-3E59-ADDA-F0E007C7F532}\InprocServer32\1.0.0.17" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E81CFA62-537D-3E59-ADDA-F0E007C7F532}\InprocServer32\1.0.0.17" Name="CodeBase" Value="file:///[#fil42B81EB2B860BF0A024B0E2A8AABB37B]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E81CFA62-537D-3E59-ADDA-F0E007C7F532}\InprocServer32" Name="Class" Value="PrintButtons.XMLButtonDef+SingleButtonDefintion" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E81CFA62-537D-3E59-ADDA-F0E007C7F532}\InprocServer32" Name="Assembly" Value="PrintButtons, Version=1.0.0.17, Culture=neutral, PublicKeyToken=565c0741a0ba8e39" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E81CFA62-537D-3E59-ADDA-F0E007C7F532}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E81CFA62-537D-3E59-ADDA-F0E007C7F532}\InprocServer32" Name="CodeBase" Value="file:///[#fil42B81EB2B860BF0A024B0E2A8AABB37B]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\Description" Value="PrintButtons" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\Implemented Categories\{39AD2B5C-7A29-11D6-8E0A-0010B541CAA8}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\InprocServer32\1.0.0.17" Name="Class" Value="PrintButtons.PrintButtons.StandardAddInServer" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\InprocServer32\1.0.0.17" Name="Assembly" Value="PrintButtons, Version=1.0.0.17, Culture=neutral, PublicKeyToken=565c0741a0ba8e39" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\InprocServer32\1.0.0.17" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\InprocServer32\1.0.0.17" Name="CodeBase" Value="file:///[#fil42B81EB2B860BF0A024B0E2A8AABB37B]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\InprocServer32" Name="Class" Value="PrintButtons.PrintButtons.StandardAddInServer" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\InprocServer32" Name="Assembly" Value="PrintButtons, Version=1.0.0.17, Culture=neutral, PublicKeyToken=565c0741a0ba8e39" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\InprocServer32" Name="CodeBase" Value="file:///[#fil42B81EB2B860BF0A024B0E2A8AABB37B]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\Settings" Name="AddInType" Value="Standard" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\Settings" Name="LoadOnStartUp" Value="1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\Settings" Name="SupportedSoftwareVersionGreaterThan" Value="13.." Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{E8B2615B-11AA-4B1B-9D7C-654026C99FAC}\Settings" Name="Version" Value="0" Type="integer" Action="write" />
+                <RegistryValue Root="HKCR" Key="Component Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Name="0" Value=".NET Category" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{1279AEC8-5BCD-3E5E-A020-394479F1471D}\1.0.0.17" Name="Class" Value="PrintButtons.InventorPlotClass+strings" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{1279AEC8-5BCD-3E5E-A020-394479F1471D}\1.0.0.17" Name="Assembly" Value="PrintButtons, Version=1.0.0.17, Culture=neutral, PublicKeyToken=565c0741a0ba8e39" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{1279AEC8-5BCD-3E5E-A020-394479F1471D}\1.0.0.17" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{1279AEC8-5BCD-3E5E-A020-394479F1471D}\1.0.0.17" Name="CodeBase" Value="file:///[#fil42B81EB2B860BF0A024B0E2A8AABB37B]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{B522EFB1-3480-3794-82C6-DB8B1FB4687B}\1.0.0.17" Name="Class" Value="PrintButtons.PrintButtons.StandardAddInServer+TranslatorAddinEnum" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{B522EFB1-3480-3794-82C6-DB8B1FB4687B}\1.0.0.17" Name="Assembly" Value="PrintButtons, Version=1.0.0.17, Culture=neutral, PublicKeyToken=565c0741a0ba8e39" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{B522EFB1-3480-3794-82C6-DB8B1FB4687B}\1.0.0.17" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{B522EFB1-3480-3794-82C6-DB8B1FB4687B}\1.0.0.17" Name="CodeBase" Value="file:///[#fil42B81EB2B860BF0A024B0E2A8AABB37B]" Type="string" Action="write" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+</Wix>
