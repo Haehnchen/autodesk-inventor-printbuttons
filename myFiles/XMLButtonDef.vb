@@ -33,6 +33,8 @@ Public Class XMLButtonDef
                     Case "WindowsPrinterName" : sButton.WindowsPrinterName = attrib.Value
                     Case "UpdateIProperties" : sButton.UpdateIProperties = attrib.Value
                     Case "FixedPaperSize" : sButton.FixedPaperSize = attrib.Value
+                    Case "Translator" : sButton.Translator = attrib.Value
+                    Case "TranslatorPath" : sButton.TranslatorPath = attrib.Value
                 End Select
             Next
             sButton.Name = s.Name
@@ -155,6 +157,8 @@ Public Class XMLButtonDef
         Private _Name As String = ""
         Private _InternalName As String = ""
         Private _FixedPaperSize As String = ""
+        Private _Translator As String = ""
+        Private _TranslatorPath As String = ""
         Public Property Tooltip() As String
             Get
                 Return _Tooltip
@@ -236,6 +240,22 @@ Public Class XMLButtonDef
             End Get
             Set(ByVal value As String)
                 _InternalName = value
+            End Set
+        End Property
+        Public Property Translator() As String
+            Get
+                Return _Translator
+            End Get
+            Set(ByVal value As String)
+                _Translator = value
+            End Set
+        End Property
+        Public Property TranslatorPath() As String
+            Get
+                Return _TranslatorPath
+            End Get
+            Set(ByVal value As String)
+                _TranslatorPath = value
             End Set
         End Property
     End Class
