@@ -24,7 +24,6 @@ Namespace PrintButtons
 
 #Region "ApplicationAddInServer Members"
         Public Sub Activate(ByVal addInSiteObject As Inventor.ApplicationAddInSite, ByVal firstTime As Boolean) Implements Inventor.ApplicationAddInServer.Activate
-
             ' This method is called by Inventor when it loads the AddIn.
             ' The AddInSiteObject provides access to the Inventor Application object.
             ' The FirstTime flag indicates if the AddIn is loaded for the first time.
@@ -159,14 +158,21 @@ Namespace PrintButtons
         ''' <remarks></remarks>
         Sub ButtonEvent(ByVal pressedButton As ButtonDefinition)
             'do only on IDW-File
-            If m_inventorApplication.ActiveDocumentType = DocumentTypeEnum.kDrawingDocumentObject Then
-                'get the name of the pressed button and get the info about it
-                Dim PrinterButtonDef As XMLButtonDef.SingleButtonDefintion = AllButtons.ItemByName(pressedButton.DisplayName)
-                Dim Plotter As inventorplotclass = HelperFunctions.GeneratePlotterClass(m_inventorApplication.ActiveDocument, PrinterButtonDef)
+            If Not m_inventorApplication.ActiveDocumentType = DocumentTypeEnum.kDrawingDocumentObject Then
+                MsgBox(LanguageStr.s("ErrorNoIDW"), MsgBoxStyle.Critical)
+                Exit Sub
+            End If
+
+            'get the name of the pressed button and get the info about it
+            Dim PrinterButtonDef As XMLButtonDef.SingleButtonDefintion = AllButtons.ItemByName(pressedButton.DisplayName)
+            If PrinterButtonDef.Translator = "" Then
+                Dim Plotter As InventorPlotClass = HelperFunctions.GeneratePlotterClass(m_inventorApplication.ActiveDocument, PrinterButtonDef)
                 Plotter.plot()
             Else
-                MsgBox(LanguageStr.s("ErrorNoIDW"), MsgBoxStyle.Critical)
+                Dim enumValue As TranslatorAddinEnum = CType([Enum].Parse(GetType(TranslatorAddinEnum), PrinterButtonDef.Translator.ToLower), TranslatorAddinEnum)
+                TranslatorAddinHelper(enumValue, PrinterButtonDef.AllColorsAsBlack, PrinterButtonDef.TranslatorPath)
             End If
+
 
         End Sub
         Enum TranslatorAddinEnum
@@ -178,43 +184,56 @@ Namespace PrintButtons
         ''' <param name="type">TranslatorAddinEnum</param>
         ''' <param name="AllColorASBlack">only for PDF translator</param>
         ''' <remarks></remarks>
-        Private Sub TranslatorAddinHelper(ByVal type As TranslatorAddinEnum, Optional ByVal AllColorASBlack As Boolean = False)
-            'generate output filename depend on TranslatorAddinEnum
-            Dim OutPutFile As String = m_inventorApplication.ActiveDocument.FullFileName & "." & [Enum].GetName(GetType(TranslatorAddinEnum), type)
+        Private Sub TranslatorAddinHelper(ByVal type As TranslatorAddinEnum, Optional ByVal AllColorASBlack As Boolean = False, Optional ByVal OutPutFile As String = "")
+            Try
+                'check if we get a fullname of current dacument
+                If m_inventorApplication.ActiveDocument.FullFileName.Length = 0 Then
+                    MsgBox(LanguageStr.s("ErrorNoFileName"), MsgBoxStyle.Critical)
+                    Exit Sub
+                End If
 
-            'check if we get a fullname of current dacument
-            If m_inventorApplication.ActiveDocument.FullFileName.Length = 0 Then
-                MsgBox(LanguageStr.s("ErrorNoFileName"), MsgBoxStyle.Critical)
-                Exit Sub
-            End If
+                'generate output filename depend on TranslatorAddinEnum
+                If OutPutFile = "" Then
+                    OutPutFile = m_inventorApplication.ActiveDocument.FullFileName & "." & [Enum].GetName(GetType(TranslatorAddinEnum), type)
+                Else
+                    Dim filename As String = m_inventorApplication.ActiveDocument.File.FullFileName
+                    filename = filename.Substring(filename.LastIndexOf("\"))
 
-            'check if we want to overwrite the file if it exists
-            If HelperFileExistsOverwrite(OutPutFile) = False Then Exit Sub
+                    OutPutFile = OutPutFile & filename & "." & [Enum].GetName(GetType(TranslatorAddinEnum), type)
 
-            'perform printevents similar to m_InputEvents_OnActivateCommand
-            If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Or AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then
-                Dim plotCfg As New InventorPlotClass(m_inventorApplication.ActiveDocument)
-                If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Then plotCfg.GenerateIProperties()
-                If AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then plotCfg.UpdateStyles()
-                plotCfg.UpdateDocument()
-            End If
+                End If
 
-            'use translator function depend TranslatorAddinEnum
-            Select Case type
-                Case TranslatorAddinEnum.dwg
-                    'TODO: find translator id for dwg
-                    Dim oDoc As Document = m_inventorApplication.ActiveDocument
-                    Call oDoc.SaveAs(OutPutFile, True)
-                Case TranslatorAddinEnum.pdf
-                    InventorPlotClass.SaveAsPDF(m_inventorApplication, OutPutFile, AllColorASBlack)
-                Case TranslatorAddinEnum.dwf
-                    InventorPlotClass.SaveAsDWF(m_inventorApplication, OutPutFile)
-            End Select
+                'check if we want to overwrite the file if it exists
+                If HelperFileExistsOverwrite(OutPutFile) = False Then Exit Sub
 
-            'open saved file
-            If MsgBox(LanguageStr.s("FileSaved").Replace("{filename}", OutPutFile), MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                ExecuteFile(OutPutFile)
-            End If
+                'perform printevents similar to m_InputEvents_OnActivateCommand
+                If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Or AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then
+                    Dim plotCfg As New InventorPlotClass(m_inventorApplication.ActiveDocument)
+                    If AllButtons.b("SetPlotIFeaturesOnGlobalPrintEvent", True) = True Then plotCfg.GenerateIProperties()
+                    If AllButtons.b("UpdatePlotStylesOnGlobalPrintEvent", True) = True Then plotCfg.UpdateStyles()
+                    plotCfg.UpdateDocument()
+                End If
+
+                'use translator function depend TranslatorAddinEnum
+                Select Case type
+                    Case TranslatorAddinEnum.dwg
+                        'TODO: find translator id for dwg
+                        Dim oDoc As Document = m_inventorApplication.ActiveDocument
+                        Call oDoc.SaveAs(OutPutFile, True)
+                    Case TranslatorAddinEnum.pdf
+                        InventorPlotClass.SaveAsPDF(m_inventorApplication, OutPutFile, AllColorASBlack)
+                    Case TranslatorAddinEnum.dwf
+                        InventorPlotClass.SaveAsDWF(m_inventorApplication, OutPutFile)
+                End Select
+
+                'open saved file
+                If MsgBox(LanguageStr.s("FileSaved").Replace("{filename}", OutPutFile), MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    ExecuteFile(OutPutFile)
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Critical)
+
+            End Try
 
         End Sub
 
